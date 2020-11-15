@@ -18,11 +18,9 @@ app.use(bodyParser.json());
 app.use(cors());
 
 app.post('/createRoom',function createRoom(req,res) {
-    console.log('attempting create')
 
     randomBytes(48,function cb(err,buf) {
         if(err){
-            console.log('create failed for server')
 
             res.status(500).json({
                 message : "UNEXPECTED ERROR"
@@ -43,14 +41,12 @@ app.post('/createRoom',function createRoom(req,res) {
                 connectedSockets[socketId] === undefined
 
             ){
-                console.log('create failed for input')
 
                 res.status(422).json({
                     message : "invalid input"
                 });
 
             }else{
-                console.log('successful create');
 
                 rooms[room] = [{
                     name,
@@ -71,7 +67,6 @@ app.post('/createRoom',function createRoom(req,res) {
 });
 
 app.post('/joinRoom',function joinRoom(req,res) {
-    console.log('join attempt')
 
     const room = req.body.room;
     const name = req.body.name;
@@ -92,14 +87,12 @@ app.post('/joinRoom',function joinRoom(req,res) {
         connectedSockets[socketId] === undefined
 
     ){
-        console.log('unsuccessful join attempt')
 
         res.status(422).json({
             message : 'invalid input'
         });
 
     }else{
-        console.log('successful join attempt');
 
         const users = rooms[room];
         
